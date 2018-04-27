@@ -1,0 +1,54 @@
+in this, internal ADC of Atmega8 is used which is 28 pin microcontroller
+it is 10 bit ADC
+Vfs=5v
+Successive Approximation Type ADC
+Resolution=4.88mv
+Port C has functionality of ADC
+there are 6 channels
+
+pin no    Port
+ 28       PC5(adc5/SCL)
+ 27       PC4(adc4/SDA)  
+ 26       PC3(adc3)
+ 25       PC2(adc2)
+ 24       PC1(adc1)
+ 23       PC0(adc0)
+ 
+ 
+ There are 3 important registers
+ ADMUX (adc multiplexer and selection register)
+ ADCSRA (adc control and Status Register)
+ ADCH and ADCL (adc data registers)
+
+
+ADCSRA bit definition: 
+
+Bit 	7 	6 	5 	4 	3 	2 	1 	0
+ADCSRA 	ADEN 	ADSC 	ADFR 	ADIF 	ADIE 	ADPS2 	ADPS1 	ADPS0
+Read / Write 	R/W 	R/W 	R/W 	R/W 	R/W 	R/W 	R/W 	R/W
+Initial Value 	0 	0 	0 	0 	0 	0 	0 	0
+
+ADMUX bit definition
+
+
+Bit 	7 	6 	5 	4 	3 	2 	1 	0
+ADMUX 	REFS1 	REFS0 	ADLAR 	- 	MUX3 	MUX2 	MUX1 	MUX0
+Read / Write 	R/W 	R/W 	R/W 	R 	R/W 	R/W 	R/W 	R/W
+Initial Value 	0 	0 	0 	0 	0 	0 	0 	0
+
+ADC Left Adjust Result (ADLAR): Once the conversion is complete, result is stored in two ADC data registers ADCH and ADCL. This result can be either left justified or right justified. If ADLAR bit is set, then it is left adjusted, and clearing it will right justify the result. By default, bit is cleared and right justified.
+
+Right Justified
+Bit 	15 	14 	13 	12 	11 	10 	9 	8
+ADCH 	- 	- 	- 	- 	- 	- 	10th bit 	9th bit
+Bit 	7 	6 	5 	4 	3 	2 	1 	0
+ADCL 	8th bit 	7th bit 	6th bit 	5th bit 	4th bit 	3rd bit 	2nd bit 	1st bit
+
+Left Justified
+Bit 	15 	14 	13 	12 	11 	10 	9 	8
+ADCH 	10th bit 	9th bit 	8th bit 	7th bit 	6th bit 	5th bit 	4th bit 	3rd bit
+Bit 	7 	6 	5 	4 	3 	2 	1 	0
+ADCL 	2nd bit 	1st bit 	- 	- 	- 	- 	- 	-
+
+
+Reference: http://www.robotplatform.com/knowledge/ADC/adc_tutorial_3.html
