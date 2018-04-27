@@ -34,7 +34,7 @@ This repository contains
     $ avrdude -c usbasp -p m8 -U flash:w:main.hex
     
     $ cd Course-project/Driver
-    $ make
+    $ make                      this will generate executable file
     $ sudo insmod driver.ko     it will insert the module
     $ sudo rmmod driver.ko      it will remove the module
     
