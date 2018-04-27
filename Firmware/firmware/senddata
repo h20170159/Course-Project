@@ -1,0 +1,75 @@
+#include<linux/kernel.h>
+#include<linux/module.h>
+#include<linux/usb.h>
+//#include<linux/slab.h>
+#include<linux/types.h>
+
+#define VID  0x16C0
+#define PID  0x05DC
+
+#define SET_CHANNEL 0x40
+#define GET_CHANNEL 0xC0
+
+     //spinlock_t lock;
+static void usbdev_disconnect(struct usb_interface *interface)
+{
+	printk(KERN_INFO " Device Removed\n");
+	return;
+}
+
+static struct usb_device_id usbdev_table [] = {
+	{USB_DEVICE(VID,PID)},
+	{} /*terminating entry*/	
+};
+MODULE_DEVICE_TABLE(usb, usbdev_table);
+
+static int usbdev_probe(struct usb_interface *interface, const struct usb_device_id *id)
+{
+	struct usb_device *udev = interface_to_usbdev(interface);
+
+	unsigned char      buffer[8]="";//this is the buffer where i am trying to receive data from firmware
+
+	int        nBytes,buf;
+
+	if(id->idProduct == PID)
+	{
+		printk(KERN_INFO "device available in\n");
+	}
+
+
+//if(strcmp(argv[1], "adc") == 0){
+	   // spin_lock(&lock);
+
+
+/*
+ * usb_control_msg(struct usb_device *dev, unsigned int pipe,
+ _ _u8 request, _ _u8 requesttype,
+ _ _u16 value, _ _u16 index,
+ void *data, _ _u16 size, int timeout);
+ */
+nBytes = usb_control_msg(udev, usb_rcvctrlpipe(udev, 0) ,0, GET_CHANNEL, (char *)buff, 0,(char *)buffer, sizeof(buffer), 5000);
+
+buf = buffer[0]|buffer[1]<<9;
+  printk(KERN_INFO "msg value%d\n",buf);
+
+
+///////////////////////////////////////////////////////////////////////
+//////          firmware side         ////
+static int readADC(void)
+{
+int bin=0b1000000010;
+return bin;
+}
+
+USB_PUBLIC uchar usbFunctionSetup(uchar data[8])
+{
+usbRequest_t    *rq = (void *)data;
+//uchar           status = eeprom_read_byte(EEPROM_LOCATION);
+static uchar    replyBuf[2];
+usbMsgPtr = replyBuf;              //this the buffer which is collecting data from firmware
+
+if(rq->bRequest == 0xC0){  /* ADC*/
+        replyBuf[0] = readADC();
+	replyBuf[1] = readADC()>>8;
+        return 2;
+    
