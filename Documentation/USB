@@ -1,2 +1,14 @@
 USB
-Usb_control_msg
+first it enumerates the device depending upon VID and PID 
+we used shared VID and PID .
+
+VID = 0x16C0
+PID = 0x05DC
+
+Usb_control_msg structure
+
+usb_control_msg(struct usb_device *dev, unsigned int pipe,
+ _ _u8 request, _ _u8 requesttype,
+ _ _u16 value, _ _u16 index,
+ void *data, _ _u16 size, int timeout);
+ 
