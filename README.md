@@ -22,20 +22,28 @@ This repository contains
 
 3. Firmware
    This contains firwareside code 
-   Firware side code is the code which implements actual functionality of adc ,all adc related     functioning done in this code.
+   Firware side code is the code which implements actual functionality of adc ,all adc related functioning done in this code.
    
    
    
-   How to build this 
-   install avrdude 
-    clone the complete repository.
+   How to build this ?
+   
+   install avrdude
+   
+    clone the complete repository
+    
     $ cd Course-project/firmware
+    
     $ make all
+    
     $ avrdude -c usbasp -p m8 -U flash:w:main.hex
     
     $ cd Course-project/Driver
+    
     $ make                      this will generate executable file
+    
     $ sudo insmod driver.ko     it will insert the module
+    
     $ sudo rmmod driver.ko      it will remove the module
     
     
