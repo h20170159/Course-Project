@@ -53,7 +53,7 @@ This repository contains
                     
     $ cd /dev
     
-    $ ls -l         here you can see a char driver has been created named as adc0
+    $ ls -l         (here you can see a char driver has been created named as adc0)
     
     $ sudo rmmod driver.ko             ( it will remove the module)
     
