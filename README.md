@@ -43,13 +43,20 @@ This repository contains
     $ make                      this will generate executable file (i.e driver.ko will be generated)
     
     $ sudo insmod driver.ko     it will insert the module
+    
     $ gcc -o adc_user adc_user.c
+    
     $ ./adc_user                (here choose menu accordingly)
+    
                    (if permission denied then change permission by following command
                     $ chmod 777 /dev/adc0)
+                    
     $ cd /dev
+    
     $ ls -l         here you can see a char driver has been created named as adc0
+    
     $ sudo rmmod driver.ko      it will remove the module
+    
     
     
     
